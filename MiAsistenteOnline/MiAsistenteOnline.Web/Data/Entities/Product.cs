@@ -30,7 +30,9 @@ namespace MiAsistenteOnline.Web.Data.Entities
         public bool IsAvailabe  { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = false)]
-        public double  Stock  { get; set; }
+        public double Stock { get; set; }
+
+        public User User { get; set; }
 
 
     }
