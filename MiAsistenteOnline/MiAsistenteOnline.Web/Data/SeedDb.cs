@@ -3,6 +3,7 @@
 namespace MiAsistenteOnline.Web.Data
 {
     using Entities;
+    using MiAsistenteOnline.Web.Helpers;
     using Microsoft.AspNetCore.Identity;
     using System;
     using System.Collections.Generic;
@@ -12,19 +13,20 @@ namespace MiAsistenteOnline.Web.Data
     public class SeedDb
     {
         private readonly DataContext context;
-        private readonly UserManager<User> userManager;
+        private readonly IUserHelper userHelper;
         private Random random;
 
-        public SeedDb(DataContext context, UserManager<User> userManager){
-            this.userManager = userManager;
+        public SeedDb(DataContext context,IUserHelper userHelper ){
+
             this.context = context;
+            this.userHelper = userHelper;
             this.random = new Random();
         }
 
         public async Task SeedAsync()
         {
 
-            var user = await this.userManager.FindByEmailAsync("jzuluaga55@gmail.com");
+            var user = await this.userHelper.GetUserByEmailAsync("jzuluaga55@gmail.com");
             if (user == null)
             {
                 user = new User
@@ -35,7 +37,7 @@ namespace MiAsistenteOnline.Web.Data
                     UserName = "jzuluaga55@gmail.com"
                 };
 
-                var result = await this.userManager.CreateAsync(user, "123456");
+                var result = await this.userHelper.AddUserAsync(user, "123456");
                 if (result != IdentityResult.Success)
                 {
                     throw new InvalidOperationException("Could not create the user in seeder");

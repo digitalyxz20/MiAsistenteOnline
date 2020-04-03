@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MiAsistenteOnline.Web.Data;
 using MiAsistenteOnline.Web.Data.Entities;
+using MiAsistenteOnline.Web.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -58,7 +59,10 @@ namespace MiAsistenteOnline.Web
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<SeedDb>();
-            services.AddScoped<IRepository, Repository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+
+            services.AddScoped<IUserHelper, UserHelper>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

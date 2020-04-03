@@ -7,22 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MiAsistenteOnline.Web.Data;
 using MiAsistenteOnline.Web.Data.Entities;
+using MiAsistenteOnline.Web.Helpers;
 
 namespace MiAsistenteOnline.Web.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly IRepository repository;
+        private readonly IProductRepository productRepository;
+        private readonly IUserHelper userHelper;
 
-        public ProductsController(IRepository repository)
+        public ProductsController(IProductRepository productRepository, IUserHelper userHelper)
         {
-            this.repository = repository;
+            this.productRepository = productRepository;
+            this.userHelper = userHelper;
         }
 
         // GET: Products
         public IActionResult Index()
         {
-            return View(this.repository.GetProducts());
+            return View(this.productRepository.GetAll());
         }
    
         // GET: Products/Details/5
@@ -33,7 +36,7 @@ namespace MiAsistenteOnline.Web.Controllers
                 return NotFound();
             }
 
-            var product = repository.GetProduct(id.Value);
+            var product = this.productRepository.GetByIdAsync(id.Value);
             if (product == null)
             {
                 return NotFound();
@@ -55,8 +58,8 @@ namespace MiAsistenteOnline.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                this.repository.AddProduct(product);
-                await this.repository.SaveAllAsync();
+                product.User = await this.userHelper.GetUserByEmailAsync("jzuluaga55@gmail.com");
+                await this.productRepository.CreateAsync(product);
                 return RedirectToAction(nameof(Index));
             }
             return View(product);
@@ -70,7 +73,7 @@ namespace MiAsistenteOnline.Web.Controllers
                 return NotFound();
             }
 
-            var product = this.repository.GetProduct(id.Value);
+            var product = this.productRepository.GetByIdAsync(id.Value);
             if (product == null)
             {
                 return NotFound();
@@ -88,12 +91,12 @@ namespace MiAsistenteOnline.Web.Controllers
             {
                 try
                 {
-                    this.repository.UpdateProduct(product);
-                    await this.repository.SaveAllAsync();
+                    await this.productRepository.UpdateAsync(product);
+                    
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!this.repository.ProductExists(product.Id))
+                    if (! await this.productRepository.ExistAsync(product.Id))
                     {
                         return NotFound();
                     }
@@ -115,7 +118,7 @@ namespace MiAsistenteOnline.Web.Controllers
                 return NotFound();
             }
 
-            var product = this.repository.GetProduct(id.Value);
+            var product = this.productRepository.GetByIdAsync(id.Value);
             if (product == null)
             {
                 return NotFound();
@@ -129,9 +132,8 @@ namespace MiAsistenteOnline.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = this.repository.GetProduct(id);
-            this.repository.RemoveProduct(product);
-            await this.repository.SaveAllAsync();
+            var product = await this.productRepository.GetByIdAsync(id);
+            await this.productRepository.DeleteAsync(product);
             return RedirectToAction(nameof(Index));
         }
 
