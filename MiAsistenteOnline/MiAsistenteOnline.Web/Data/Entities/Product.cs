@@ -35,6 +35,5 @@ namespace MiAsistenteOnline.Web.Data.Entities
         public User User { get; set; }
 
 
-
     }
 }

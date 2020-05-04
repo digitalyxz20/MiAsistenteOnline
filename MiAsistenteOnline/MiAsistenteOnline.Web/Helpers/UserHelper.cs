@@ -21,8 +21,8 @@ namespace MiAsistenteOnline.Web.Helpers
 
         public async Task<User> GetUserByEmailAsync(string email)
         {
-            return await this.userManager.FindByEmailAsync(email);
-            
+            var user = await this.userManager.FindByEmailAsync(email);
+            return user;
         }
     }
 
