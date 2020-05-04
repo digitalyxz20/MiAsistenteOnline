@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MiAsistenteOnline.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200402064456_User")]
-    partial class User
+    [Migration("20200504034439_db1")]
+    partial class db1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
