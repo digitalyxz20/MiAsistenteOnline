@@ -12,27 +12,45 @@ namespace MiAsistenteOnline.Web.Data.Entities
 
         [MaxLength(50)]
         [Required]
+        [Display(Name ="Producto")]
         public string Name { get; set; }
 
-        [DisplayFormat(DataFormatString ="{0:C2}", ApplyFormatInEditMode =false)]
+        [DisplayFormat(DataFormatString ="{0:N2}", ApplyFormatInEditMode = false)]
+        [Display(Name = "Precio")]
         public Decimal Price { get; set; }
 
-        [Display(Name = "Image")]
+        [Display(Name = "Imagen")]
         public String ImageUrl  { get; set; }
 
-        [Display(Name = "Last Purchase")]
+        [Display(Name = "Ultima compra")]
         public DateTime? LastPurchase  { get; set; }
 
-        [Display(Name = "Last Sale")]
+        [Display(Name = "Ultima venta")]
         public DateTime? LastSale { get; set; }
 
-        [Display(Name = "Is Availabe?")]
+        [Display(Name = "Esta Disponible?")]
         public bool IsAvailabe  { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = false)]
+        [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = false)]
         public double Stock { get; set; }
 
         public User User { get; set; }
+
+        public string ImageFullPath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(this.ImageUrl))
+                {
+                    return null;
+                }
+
+                return $"https://miasistenteonlineweb.azurewebsites.net{this.ImageUrl.Substring(1)}";
+            }
+        }
+
+        public virtual ICollection<ProductPresentacion> ProductPresentacions { get; set; }
+
 
 
 

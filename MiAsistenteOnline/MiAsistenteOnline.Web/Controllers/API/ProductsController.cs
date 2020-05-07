@@ -1,5 +1,6 @@
 ﻿using MiAsistenteOnline.Web.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace MiAsistenteOnline.Web.Controllers.API
         [HttpGet]
         public IActionResult GetProducts()
         {
-            return this.Ok(this.productRepository.GetAll());
+            return this.Ok(this.productRepository.GetAllWithUsers().OrderBy(p => p.Name));
         }
 
 

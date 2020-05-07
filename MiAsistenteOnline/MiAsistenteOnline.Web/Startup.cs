@@ -60,6 +60,11 @@ namespace MiAsistenteOnline.Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<SeedDb>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductPresentacionRepository, ProductPresentacionRepository>();
+            services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IPedidoRepository, PedidoRepository>();
+            services.AddScoped<IPedidoDetalleRepository, PedidoDetalleRepository>();
+            services.AddScoped<IZonaRepository, ZonaRepository>();
 
             services.AddScoped<IUserHelper, UserHelper>();
 

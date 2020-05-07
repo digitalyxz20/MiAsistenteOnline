@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace MiAsistenteOnline.Web.Data
 {
-    public interface IProductRepository : IGenericRepository<Product>
+    public interface IClienteRepository : IGenericRepository<Cliente>
     {
-        IQueryable<Product> GetAllWithUsers();
-
+    
     }
-
 }
