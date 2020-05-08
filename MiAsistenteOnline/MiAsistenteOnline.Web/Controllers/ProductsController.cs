@@ -28,8 +28,31 @@ namespace MiAsistenteOnline.Web.Controllers
         public IActionResult Index()
         {
             return View(this.productRepository.GetAll().OrderBy(t => t.Name));
-        } 
-   
+        }
+
+
+        //mostrar categorias
+        public IActionResult Categoria()
+        {
+            return View(this.productRepository.GetAllCategory().OrderBy(t => t.GrupoArticulo));
+        }
+
+
+
+        [Route("/Products/BuscarProductos", Name = "buscarProductos")]
+        public IActionResult BuscarProductos(string GrupoArticulo)
+        {
+            return View(this.productRepository.GetProductoPorCategoria(GrupoArticulo).OrderBy(p => p.Name));
+        }
+
+        
+        public IActionResult BusProductos(string GrupoArticulo)
+        {
+            return PartialView(this.productRepository.GetProductoPorCategoria(GrupoArticulo).OrderBy(p => p.Name));
+        }
+
+
+
         // GET: Products/Details/5
         public IActionResult Details(int? id)
         {

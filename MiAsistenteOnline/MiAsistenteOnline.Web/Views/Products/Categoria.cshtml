@@ -1,0 +1,48 @@
+﻿@model IEnumerable<MiAsistenteOnline.Web.Data.Entities.Product>
+
+@{
+    ViewData["Title"] = "Categoria";
+}
+
+<div class="container-fluid">
+
+
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="list-group" role="tablist">
+
+                @foreach (var item in Model)
+                {
+
+                    var parms = new Dictionary<string, string>
+            {
+                { "GrupoArticulo", item.GrupoArticulo },
+
+             };
+
+                    //<a asp-route="buscarProductos" asp-all-route-data="parms"  class="btn btn-primary btn-lg">@Html.DisplayFor(modelItem => item.GrupoArticulo)</a>
+                    //<button class="btn btn-primary btn-lg btn-block" onclick="getDataAjax('@item.GrupoArticulo','BusProductos')">@Html.DisplayFor(modelItem => item.GrupoArticulo)</button>
+
+                <a class="list-group-item list-group-item-action" role="tab" data-toggle="list" onclick="getDataAjax('@item.GrupoArticulo','BusProductos')"><div class="let"><p>@Html.DisplayFor(modelItem => item.GrupoArticulo)</p></div></a>
+                }
+
+
+
+            </div>
+        </div>
+        <div class="col-lg-10">
+            <div id="productosCategoria"></div>
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+

@@ -10,6 +10,10 @@ namespace MiAsistenteOnline.Web.Data
     {
         IQueryable<Product> GetAllWithUsers();
 
+        IQueryable<Product> GetAllCategory();
+
+        IQueryable<Product> GetProductoPorCategoria(string categoria);
+
     }
 
 }

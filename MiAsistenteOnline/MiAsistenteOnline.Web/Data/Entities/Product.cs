@@ -10,7 +10,7 @@ namespace MiAsistenteOnline.Web.Data.Entities
     {
         public int Id { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(200)]
         [Required]
         [Display(Name ="Producto")]
         public string Name { get; set; }
@@ -30,6 +30,9 @@ namespace MiAsistenteOnline.Web.Data.Entities
 
         [Display(Name = "Esta Disponible?")]
         public bool IsAvailabe  { get; set; }
+
+        [Display(Name = "Categoria")]
+        public string GrupoArticulo { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = false)]
         public double Stock { get; set; }

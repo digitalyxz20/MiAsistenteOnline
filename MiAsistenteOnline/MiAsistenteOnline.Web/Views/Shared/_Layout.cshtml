@@ -3,78 +3,92 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - COMPRAYA</title>
+    <title>@ViewData["Title"] - COMPRALO YA </title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">COMPRAYA!</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <!-- <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li> -->
-                    <!-- <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li> -->
-                        <li><a asp-area="" asp-controller="Products" asp-action="Index">Productos</a></li>
-                        <li><a asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a></li>
-                        <li><a asp-area="" asp-controller="Pedidos" asp-action="Index">Pedidos</a></li>
-                        <li><a asp-area="" asp-controller="PedidoDetalles" asp-action="Index">PedidosDetalles</a></li>
-                        <li><a asp-area="" asp-controller="ProductPresentaciones" asp-action="Index">Presentaciones</a></li>
-                        <li><a asp-area="" asp-controller="Zonas" asp-action="Index">Zona</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <a class="navbar-brand" href="#">COMPRALO YA!</a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
-        <partial name="_CookieConsentPartial" />
+                <!--<li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Products" asp-action="Categoria">Categorias</a></li>
+                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Products" asp-action="Index">Productos</a></li>
+                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a></li>
+                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Pedidos" asp-action="Index">Pedidos</a></li>
+                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="PedidoDetalles" asp-action="Index">PedidosDetalles</a></li>
+                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="ProductPresentaciones" asp-action="Index">Presentaciones</a></li>
+                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Zonas" asp-action="Index">Zona</a></li>-->
 
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; 2020 - COMPRAYA</p>
-            </footer>
+
+                
+                
+                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Products" asp-action="Categoria">Promociones</a></li>
+                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Products" asp-action="Categoria">Alimentos</a></li>
+                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Products" asp-action="Categoria">Bebidas</a></li>
+                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Products" asp-action="Categoria">Limpieza</a></li>
+                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Zonas" asp-action="Index">Zona de Distribucion</a></li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+            <button style='background-image: url("~/images/vector-add-to-cart-vector-icon.jpg")' type="button" class="btn btn-outline-primary">Carrito(0)</button>
         </div>
+        
+    </nav>
 
-        <environment include="Development">
-            <script src="~/lib/jquery/dist/jquery.js"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-            <script src="~/js/site.js" asp-append-version="true"></script>
-        </environment>
-        <environment exclude="Development">
-            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                    asp-fallback-test="window.jQuery"
-                    crossorigin="anonymous"
-                    integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-            </script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                    crossorigin="anonymous"
-                    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
-            </script>
-            <script src="~/js/site.min.js" asp-append-version="true"></script>
-        </environment>
+    <partial name="_CookieConsentPartial" />
 
-        @RenderSection("Scripts", required: false)
-    </body>
+    <div>
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; 2020 - COMPRAYA</p>
+        </footer>
+    </div>
+
+    <environment include="Development">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
     </html>
