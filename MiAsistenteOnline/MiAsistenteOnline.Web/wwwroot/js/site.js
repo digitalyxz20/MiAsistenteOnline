@@ -16,3 +16,4 @@ function getDataAjax(GrupoArticulo, action) {
     );
 
 }
+

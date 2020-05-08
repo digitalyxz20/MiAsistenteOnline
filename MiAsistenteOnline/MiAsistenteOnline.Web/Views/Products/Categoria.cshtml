@@ -15,23 +15,40 @@
                 {
 
                     var parms = new Dictionary<string, string>
-            {
-                { "GrupoArticulo", item.GrupoArticulo },
+                {
+                    { "GrupoArticulo", item.GrupoArticulo },
 
-             };
+                 };
 
                     //<a asp-route="buscarProductos" asp-all-route-data="parms"  class="btn btn-primary btn-lg">@Html.DisplayFor(modelItem => item.GrupoArticulo)</a>
                     //<button class="btn btn-primary btn-lg btn-block" onclick="getDataAjax('@item.GrupoArticulo','BusProductos')">@Html.DisplayFor(modelItem => item.GrupoArticulo)</button>
 
-                <a class="list-group-item list-group-item-action" role="tab" data-toggle="list" onclick="getDataAjax('@item.GrupoArticulo','BusProductos')"><div class="let"><p>@Html.DisplayFor(modelItem => item.GrupoArticulo)</p></div></a>
+                    <a class="list-group-item list-group-item-action" role="tab" data-toggle="list" onclick="getDataAjax('@item.GrupoArticulo','BusProductos')"><div class="let"><p>@Html.DisplayFor(modelItem => item.GrupoArticulo)</p></div></a>
                 }
 
 
 
             </div>
         </div>
-        <div class="col-lg-10">
+        <div class="col-lg-8">
             <div id="productosCategoria"></div>
+        </div>
+
+        <div class="col-lg-2">
+            <div id="Carrito">
+                <div class="card border-info mb-3" style="max-width: 15rem;">
+                    <div class="card-header bg-transparent border-success">
+                        Señor Gomez buen dia!
+                    </div>
+                    <div class="card-body text-info">
+                        <h5 class="card-title">Carrito de compras</h5>
+                        <p class="card-text"> seleccion 1 </p>
+                        <p class="card-text"> seleccion 2 </p>
+                    </div>
+                    <div class="card-footer bg-transparent border-success">Total : S/. 500.00 </div>
+                </div>
+
+            </div>
         </div>
 
 
