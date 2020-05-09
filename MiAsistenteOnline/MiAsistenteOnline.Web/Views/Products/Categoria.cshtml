@@ -4,6 +4,13 @@
     ViewData["Title"] = "Categoria";
 }
 
+
+
+
+
+
+
+
 <div class="container-fluid">
 
 
@@ -15,10 +22,10 @@
                 {
 
                     var parms = new Dictionary<string, string>
-                {
-                    { "GrupoArticulo", item.GrupoArticulo },
+                        {
+                            { "GrupoArticulo", item.GrupoArticulo },
 
-                 };
+                         };
 
                     //<a asp-route="buscarProductos" asp-all-route-data="parms"  class="btn btn-primary btn-lg">@Html.DisplayFor(modelItem => item.GrupoArticulo)</a>
                     //<button class="btn btn-primary btn-lg btn-block" onclick="getDataAjax('@item.GrupoArticulo','BusProductos')">@Html.DisplayFor(modelItem => item.GrupoArticulo)</button>
@@ -30,22 +37,32 @@
 
             </div>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-7">
             <div id="productosCategoria"></div>
         </div>
 
-        <div class="col-lg-2">
+        <div class="col">
             <div id="Carrito">
-                <div class="card border-info mb-3" style="max-width: 15rem;">
+                <div class="card border-info mb-3" style="max-width: 28rem;">
                     <div class="card-header bg-transparent border-success">
                         Señor Gomez buen dia!
                     </div>
-                    <div class="card-body text-info">
-                        <h5 class="card-title">Carrito de compras</h5>
-                        <p class="card-text"> seleccion 1 </p>
-                        <p class="card-text"> seleccion 2 </p>
+                    <div class="card-body text-info" >
+                        <div class="container-fluid">
+                            <table class="table table-hover table-dark">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Precio</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="descripcionCompra"></tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="card-footer bg-transparent border-success">Total : S/. 500.00 </div>
+                    <div class="card-footer bg-transparent border-success"> <center><h3 id="total">Total : S/. 0.00 </h3> </center></div>
                 </div>
 
             </div>
@@ -55,7 +72,7 @@
 
     </div>
 
-
+</div>
 
 
 

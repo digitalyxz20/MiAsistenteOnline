@@ -7,17 +7,20 @@
 
     @*<environment include="Development">*@
 
-        
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="~/css/site.css" />
     @*</environment>*@
     @*<environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>*@
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" />
+            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
+                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+            <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        </environment>*@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,18 +32,18 @@
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
                 <!--<li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Products" asp-action="Categoria">Categorias</a></li>
-                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Products" asp-action="Index">Productos</a></li>
-                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a></li>
-                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Pedidos" asp-action="Index">Pedidos</a></li>
-                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="PedidoDetalles" asp-action="Index">PedidosDetalles</a></li>
-                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="ProductPresentaciones" asp-action="Index">Presentaciones</a></li>
-                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Zonas" asp-action="Index">Zona</a></li>-->
+        <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Products" asp-action="Categoria">Categorias</a></li>
+        <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Products" asp-action="Index">Productos</a></li>
+        <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a></li>
+        <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Pedidos" asp-action="Index">Pedidos</a></li>
+        <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="PedidoDetalles" asp-action="Index">PedidosDetalles</a></li>
+        <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="ProductPresentaciones" asp-action="Index">Presentaciones</a></li>
+        <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Zonas" asp-action="Index">Zona</a></li>-->
 
 
 
 
-                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Products" asp-action="Categoria">Promociones</a></li>
+                <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Promociones</a></li>
                 <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Products" asp-action="Categoria">Alimentos</a></li>
                 <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Products" asp-action="Categoria">Bebidas</a></li>
                 <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Products" asp-action="Categoria">Limpieza</a></li>
@@ -48,9 +51,13 @@
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                
             </form>
-            <button style='background-image: url("~/images/vector-add-to-cart-vector-icon.jpg")' type="button" class="btn btn-outline-primary">Carrito(0)</button>
+            <div style="margin:1%"><button type="button" class="btn btn-primary">Registrese</button></div>
+            <div style="margin:1%"><button type="button" class="btn btn-primary">Carrito (0 )</button></div>
+           
+            
+
         </div>
 
     </nav>
@@ -60,17 +67,40 @@
     <div>
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; 2020 - COMPRAYA</p>
+        <footer id="sticky-footer" class="py-4 bg-dark text-white-50" style="position:">
+
+            <div class="container text-center" style="margin-bottom:1%">
+
+
+                <small> <h6> Encuentranos Tambien </h6> </small>
+            </div>
+
+            <div class="container text-center">
+                <a href="#"><img src="~/images/twitter.png" height="32" width="32" /></a>
+                <a href="#"><img src="~/images/facebook.png" height="32" width="32" /></a>
+                <a href="#"><img src="~/images/google.png" height="32" width="32" /></a>
+                <a href="#"><img src="~/images/linkerin.png" height="32" width="32" /></a>
+                <a href="#"><img src="~/images/whatsapp.png" height="32" width="32" /></a>
+                <a href="#"><img src="~/images/youtube.png" height="32" width="32" /></a>
+
+            </div>
+            <div class="container text-center" style="margin-top:1%">
+
+
+                <small>Copyright &copy; Compra Ya </small>
+            </div>
+
+
+
         </footer>
     </div>
 
     <!--<environment include="Development">-->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     <!--</environment>-->
     <!--<environment exclude="Development">
