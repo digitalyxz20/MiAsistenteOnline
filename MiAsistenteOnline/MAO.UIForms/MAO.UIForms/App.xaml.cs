@@ -1,4 +1,5 @@
-﻿using MAO.UIForms.Views;
+﻿using MAO.UIForms.ViewModels;
+using MAO.UIForms.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,7 +13,8 @@ namespace MAO.UIForms
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new LoginPage()); 
+            MainViewModel.GetInstance().Login = new LoginViewModel();
+            this.MainPage = new NavigationPage(new LoginPage()); 
         }
 
         protected override void OnStart()

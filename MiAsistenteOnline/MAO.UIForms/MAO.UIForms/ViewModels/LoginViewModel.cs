@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using MAO.UIForms.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,8 +13,12 @@ namespace MAO.UIForms.ViewModels
         public string Email { get; set; }
         public string Password { get; set; }
         public ICommand LoginCommand => new RelayCommand(Login);
-            
-                
+
+        public LoginViewModel()
+        {
+            this.Email = "javier";
+            this.Password = "123";
+        }    
         
 
         private async void Login()
@@ -29,9 +34,14 @@ namespace MAO.UIForms.ViewModels
                 return;
             }
 
-
-                await Application.Current.MainPage.DisplayAlert("Ok", "Ingreso ", "ok");
+            if (!this.Email.Equals("javier") || !this.Password.Equals("123"))
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Email o password incorrectos", "Accept");
                 return;
+            }
+
+            MainViewModel.GetInstance().Products = new ProductsViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new ProductsPage());
             
         }
     }
