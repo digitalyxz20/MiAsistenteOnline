@@ -16,7 +16,7 @@ var total = 0;
 
 
 
-
+//funciones categoria y productos///////////////////////////////////////////////
 
 function getDataAjax(GrupoArticulo, action) {
     $.ajax({
@@ -67,6 +67,20 @@ $(function () {
 
 
 
+
+$("#OcultarGrupos").click(function () {
+    $("#v-pills-tab").toggle(500);
+});
+
+function OcultarGrupo()
+{
+    $("#v-pills-tab").toggle(500);
+}
+
+
+
+//funciones carrito de compras
+
 function agregarcarrito(nombre, precio, elemento) {
 
     var nombreA = elemento + "A";
@@ -88,10 +102,9 @@ function agregarcarrito(nombre, precio, elemento) {
         cadena = cadena + '<tr><th scope = "col" >' + NombreProductos[i] + '</th ><th scope="col">' + Precio[i] + '</th><th scope="col">' + Cantidad[i] + '</th><th scope="col">' + Subtotal[i] + '</th></tr >';
     } 
 
-    var element = document.getElementById("descripcionCompra");
-    
-    element.innerHTML = cadena;
+    document.getElementById("descripcionCompra").innerHTML = cadena;
     document.getElementById("total").innerHTML = "Total : S/."+total.toString();
 
-
+    document.getElementById("descripcionCompraModal").innerHTML = cadena;
+    document.getElementById("totalModal").innerHTML = "Total : S/." + total.toString();
 }

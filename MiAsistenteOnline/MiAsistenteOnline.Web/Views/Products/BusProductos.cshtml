@@ -1,34 +1,36 @@
 ﻿@model IEnumerable<MiAsistenteOnline.Web.Data.Entities.Product>
 
-<div class="row row-cols-1 row-cols-md-3">
+<div class="row row-cols-1" style="">
+       
 
-    @{ int a = 0; }
-    @foreach (var item in Model)
-    {
+            @{ int a = 0; }
+            @foreach (var item in Model)
+            {
 
-        string nombre = a + "A";
-
-
-        <div class="card border-success mb-3" style="max-width: 10rem; margin:1%">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRa-M7Y3rY6ZciRw8aum8lCjO16HTu9gbIG7zgqNWnyYCC2wRtg&usqp=CAU" class="card-img-top" alt="...">
-            <div class="card-body">
-                <center><h7 class="card-title"><div class="let"><p>@Html.DisplayFor(modelItem => item.Name)</p></div></h7></center>
-
-            </div>
-            <center><p class="card-text"><h5>S/@Html.DisplayFor(modelItem => item.Price)</h5></p></center>
-            <center>
-                <p class="card-text" style="padding-left:30%;padding-right:30%">
-
-                   
-                    <input class="form-control" id="@nombre" name="@nombre" type="number" min="1" max="5" size="2" border="1" value="1" placeholder="Cantidad" />
-
-                </p>
-            </center>
-            <center><p class="card-text"><button type="button" class="btn btn-success" onclick="agregarcarrito('@Html.DisplayFor(modelItem => item.Name)','@Html.DisplayFor(modelItem => item.Price)','@a')" style="margin:5%">Añadir</button></center>
-        </div>
+                string nombre = a + "A";
 
 
-        a++;
+                <div class="card border-success mb-3" style="max-width: 11rem; margin:0.5%">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRa-M7Y3rY6ZciRw8aum8lCjO16HTu9gbIG7zgqNWnyYCC2wRtg&usqp=CAU" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <center><h7 class="card-title"><div class="let"><p>@Html.DisplayFor(modelItem => item.Name)</p></div></h7></center>
 
-    }
+                    </div>
+                    <center><p class="card-text"><h5>S/@Html.DisplayFor(modelItem => item.Price)</h5></p></center>
+                    <center>
+                        <p class="card-text" style="padding-left:30%;padding-right:30%">
+
+
+                            <input class="form-control" id="@nombre" name="@nombre" type="number" min="1" max="5" size="2" border="1" value="1" placeholder="Cantidad" />
+
+                        </p>
+                    </center>
+                    <center><p class="card-text"><button type="button" class="btn btn-success" onclick="agregarcarrito('@Html.DisplayFor(modelItem => item.Name)','@Html.DisplayFor(modelItem => item.Price)','@a')" style="margin:5%">Añadir</button></center>
+                </div>
+
+
+                a++;
+
+            }
+        
 </div>
