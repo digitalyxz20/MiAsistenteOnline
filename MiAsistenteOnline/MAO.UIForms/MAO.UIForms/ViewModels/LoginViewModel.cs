@@ -18,8 +18,8 @@ namespace MAO.UIForms.ViewModels
         {
             this.Email = "javier";
             this.Password = "123";
-        }    
-        
+        }
+
 
         private async void Login()
         {
@@ -42,7 +42,7 @@ namespace MAO.UIForms.ViewModels
 
             MainViewModel.GetInstance().Products = new ProductsViewModel();
             await Application.Current.MainPage.Navigation.PushAsync(new ProductsPage());
-            
+
         }
     }
 }

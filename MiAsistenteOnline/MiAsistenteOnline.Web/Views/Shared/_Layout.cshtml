@@ -49,12 +49,24 @@
                 <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Products" asp-action="Categoria">Limpieza</a></li>
                 <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Zonas" asp-action="Index">Zona de Distribucion</a></li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @if (this.User.Identity.IsAuthenticated)
+                {
+                    <li><a asp-area="" asp-controller="Account" asp-action="ChangeUser">@this.User.Identity.Name</a></li>
+                    <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                }
+                else
+                {
+                    <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
+                }
+            </ul>
+
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
 
             </form>
             <div style="margin:1%"><button type="button" class="btn btn-primary">Registrese</button></div>
-            <div >
+            <div>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Carrito(0)</button>
             </div>
 
