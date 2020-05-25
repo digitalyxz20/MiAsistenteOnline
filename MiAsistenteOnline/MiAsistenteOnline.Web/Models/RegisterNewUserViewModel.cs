@@ -17,7 +17,6 @@ namespace MiAsistenteOnline.Web.Models
         public string LastName { get; set; }
 
         [Required]
-        [DataType(DataType.EmailAddress)]
         public string Username { get; set; }
 
         [Required]
@@ -26,6 +25,10 @@ namespace MiAsistenteOnline.Web.Models
         [Required]
         [Compare("Password")]
         public string Confirm { get; set; }
+
+
+        public string Celular { get; set; }
+
 
     }
 }

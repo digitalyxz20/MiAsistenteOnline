@@ -39,6 +39,10 @@ function getDataAjax(GrupoArticulo, action) {
 
 }
 
+
+
+
+
 $(function () {
     $("#IrProductos").click(function (e) {
         e.preventDefault();
@@ -81,30 +85,67 @@ function OcultarGrupo()
 
 //funciones carrito de compras
 
-function agregarcarrito(nombre, precio, elemento) {
+function AgregarCarritoSessionIni()
+{
+    $.ajax({
+        type: "GET",
+        url: "AgregarCarritoSessionIni"
+    }) // Se ejecuta si todo fue bien.
+        .done(function (result) {
+            $("#descripcionCompra").html(result);
+            $("#descripcionCompraModal").html(result);
+        })
+        // Se ejecuta si se produjo un error.
+        .fail(function (xhr, status, error) {
 
-    var nombreA = elemento + "A";
-    var cantidad = document.getElementById(nombreA).value;
-    alert( "SE añadio a carrito " );
+        })
+        // Hacer algo siempre, haya sido exitosa o no.
+        .always(function () {
 
-    NombreProductos[contador] = nombre;
-    Precio[contador] = precio;
-    Cantidad[contador] = cantidad;
-    Subtotal[contador] = (parseFloat(cantidad).toFixed(2) * parseFloat(precio).toFixed(2)).toFixed(2);
-    contador = contador + 1;
+        });
+}
 
-    var cadena = '';
-    total = 0;
-    for (var i = 0; i < contador; i++) {
+function AgregarCarritoSession(Id, nombre, precio, elemento) {
 
-        total = (parseFloat(total) + parseFloat(Subtotal[i]));
-     
-        cadena = cadena + '<tr><th scope = "col" >' + NombreProductos[i] + '</th ><th scope="col">' + Precio[i] + '</th><th scope="col">' + Cantidad[i] + '</th><th scope="col">' + Subtotal[i] + '</th></tr >';
-    } 
+    var cantidad = $("#" + elemento + "A").val();
+    $.ajax({
+        type: "POST",
+        url: "AgregarCarritoSession",
+        data: {
+            Id: Id,
+            Detalle: nombre,
+            Precio: precio,
+            Cantidad: cantidad
+        }
+    }) // Se ejecuta si todo fue bien.
+        .done(function (result) {
+            alert("Se añadio al carrito!");
+            $("#descripcionCompra").html(result);
+            $("#descripcionCompraModal").html(result);
+        })
+        // Se ejecuta si se produjo un error.
+        .fail(function (xhr, status, error) {
 
-    document.getElementById("descripcionCompra").innerHTML = cadena;
-    document.getElementById("total").innerHTML = "Total : S/."+total.toString();
+        })
+        // Hacer algo siempre, haya sido exitosa o no.
+        .always(function () {
 
-    document.getElementById("descripcionCompraModal").innerHTML = cadena;
-    document.getElementById("totalModal").innerHTML = "Total : S/." + total.toString();
+        });
+
+}
+
+function MasCantidad(elemento) {
+    var cantidad = parseInt($("#" + elemento + "A").val());
+    if (cantidad < 12) {
+        cantidad = cantidad + 1;
+        $("#" + elemento + "A").val(cantidad);
+    }
+}
+
+function MenorCantidad(elemento) {
+    var cantidad = parseInt($("#" + elemento + "A").val());
+    if (cantidad > 1) {
+        cantidad = cantidad - 1;
+        $("#" + elemento + "A").val(cantidad);
+    }
 }

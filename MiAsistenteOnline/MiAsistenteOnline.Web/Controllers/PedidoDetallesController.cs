@@ -22,7 +22,7 @@ namespace MiAsistenteOnline.Web.Controllers
         // GET: PedidoDetalles
         public async Task<IActionResult> Index()
         {
-            var dataContext = _context.PedidosDetalles.Include(p => p.Pedido).Include(p => p.ProductPresentacion);
+            var dataContext = _context.PedidosDetalles.Include(p => p.Pedido).Include(p => p.Product);
             return View(await dataContext.ToListAsync());
         }
 
@@ -36,7 +36,7 @@ namespace MiAsistenteOnline.Web.Controllers
 
             var pedidoDetalle = await _context.PedidosDetalles
                 .Include(p => p.Pedido)
-                .Include(p => p.ProductPresentacion)
+                .Include(p => p.Product)
                 .FirstOrDefaultAsync(m => m.PedidoId == id);
             if (pedidoDetalle == null)
             {
@@ -68,7 +68,7 @@ namespace MiAsistenteOnline.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["PedidoId"] = new SelectList(_context.Pedidos, "Id", "Id", pedidoDetalle.PedidoId);
-            ViewData["ProductPresentacionId"] = new SelectList(_context.ProductPresentaciones, "Id", "Id", pedidoDetalle.ProductPresentacionId);
+            ViewData["ProductPresentacionId"] = new SelectList(_context.ProductPresentaciones, "Id", "Id", pedidoDetalle.ProductId);
             return View(pedidoDetalle);
         }
 
@@ -86,7 +86,7 @@ namespace MiAsistenteOnline.Web.Controllers
                 return NotFound();
             }
             ViewData["PedidoId"] = new SelectList(_context.Pedidos, "Id", "Id", pedidoDetalle.PedidoId);
-            ViewData["ProductPresentacionId"] = new SelectList(_context.ProductPresentaciones, "Id", "Id", pedidoDetalle.ProductPresentacionId);
+            ViewData["ProductPresentacionId"] = new SelectList(_context.ProductPresentaciones, "Id", "Id", pedidoDetalle.ProductId);
             return View(pedidoDetalle);
         }
 
@@ -123,7 +123,7 @@ namespace MiAsistenteOnline.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["PedidoId"] = new SelectList(_context.Pedidos, "Id", "Id", pedidoDetalle.PedidoId);
-            ViewData["ProductPresentacionId"] = new SelectList(_context.ProductPresentaciones, "Id", "Id", pedidoDetalle.ProductPresentacionId);
+            ViewData["ProductPresentacionId"] = new SelectList(_context.ProductPresentaciones, "Id", "Id", pedidoDetalle.ProductId);
             return View(pedidoDetalle);
         }
 
@@ -137,7 +137,7 @@ namespace MiAsistenteOnline.Web.Controllers
 
             var pedidoDetalle = await _context.PedidosDetalles
                 .Include(p => p.Pedido)
-                .Include(p => p.ProductPresentacion)
+                .Include(p => p.Product)
                 .FirstOrDefaultAsync(m => m.PedidoId == id);
             if (pedidoDetalle == null)
             {

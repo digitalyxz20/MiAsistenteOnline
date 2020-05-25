@@ -10,23 +10,23 @@
                 string nombre = a + "A";
 
 
-                <div class="card border-success mb-3" style="max-width: 11rem; margin:0.5%">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRa-M7Y3rY6ZciRw8aum8lCjO16HTu9gbIG7zgqNWnyYCC2wRtg&usqp=CAU" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <center><h7 class="card-title"><div class="let"><p>@Html.DisplayFor(modelItem => item.Name)</p></div></h7></center>
-
-                    </div>
-                    <center><p class="card-text"><h5>S/@Html.DisplayFor(modelItem => item.Price)</h5></p></center>
-                    <center>
-                        <p class="card-text" style="padding-left:30%;padding-right:30%">
-
-
-                            <input class="form-control" id="@nombre" name="@nombre" type="number" min="1" max="5" size="2" border="1" value="1" placeholder="Cantidad" />
-
-                        </p>
-                    </center>
-                    <center><p class="card-text"><button type="button" class="btn btn-success" onclick="agregarcarrito('@Html.DisplayFor(modelItem => item.Name)','@Html.DisplayFor(modelItem => item.Price)','@a')" style="margin:5%">Añadir</button></center>
-                </div>
+    <div class="card border-success mb-3" style="max-width: 11rem; margin:0.5%">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRa-M7Y3rY6ZciRw8aum8lCjO16HTu9gbIG7zgqNWnyYCC2wRtg&usqp=CAU" class="card-img-top" alt="...">
+        <div class="card-body">
+            <center><h7 class="card-title"><div class="let"><p>@Html.DisplayFor(modelItem => item.Name)</p></div></h7></center>
+        </div>
+        <center><p class="card-text"><h5>S/@Html.DisplayFor(modelItem => item.Price)</h5></p></center>
+        <center>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <td><center><button type="button" class="btn btn-outline-success"  onclick="MenorCantidad('@a')"> - </button></center></td>
+                <td><center><input disabled="disabled" style="max-width: 3rem;text-align:center" class="form-control" id="@nombre" name="@nombre" maxlength="2" border="1" value="1" /></center></td>
+                <td><center><button type="button" class="btn btn-outline-success" onclick="MasCantidad('@a')">+</button></center></td>
+            </div>
+        </center>
+        <center>
+            <p class="card-text"><button type="button" class="btn btn-success" onclick="AgregarCarritoSession('@item.Id','@item.Name','@item.Price','@a')" style="margin:5%">Añadir</button>
+        </center>
+    </div>
 
 
                 a++;

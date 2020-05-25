@@ -1,0 +1,30 @@
+﻿@model IEnumerable<MiAsistenteOnline.Web.Data.Entities.PedidoDetalle>
+
+@{double a = 0.0; }
+
+@foreach (var item in Model)
+{
+    a = a  + item.Subtotal;
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cantidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subtotal)
+        </td>
+        <td>
+            <button type="button" title="Borrar" class="btn btn-danger"  >X</button>
+         </td>
+    </tr>
+}
+    <tr>
+        <td colspan="5">
+            <center><h4>S/.@a</h4></center>
+        </td>
+    </tr>

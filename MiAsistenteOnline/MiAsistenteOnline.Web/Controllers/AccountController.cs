@@ -42,7 +42,7 @@ namespace MiAsistenteOnline.Web.Controllers
                         return this.Redirect(this.Request.Query["ReturnUrl"].First());
                     }
 
-                    return this.RedirectToAction("Index", "Home");
+                    return this.RedirectToAction("Categoria","Products");
                 }
             }
 
@@ -54,7 +54,7 @@ namespace MiAsistenteOnline.Web.Controllers
         public async Task<IActionResult> Logout()
         {
             await this.userHelper.LogoutAsync();
-            return this.RedirectToAction("Index", "Home");
+            return this.RedirectToAction("Categoria", "Products");
         }
 
         public IActionResult Register()
@@ -74,14 +74,16 @@ namespace MiAsistenteOnline.Web.Controllers
                     {
                         FirstName = model.FirstName,
                         LastName = model.LastName,
-                        Email = model.Username,
-                        UserName = model.Username
+                        Email = $"{model.Username}@hot.com",
+                        UserName = model.Username,
+                        PhoneNumber = model.Celular
+
                     };
 
                     var result = await this.userHelper.AddUserAsync(user, model.Password);
                     if (result != IdentityResult.Success)
                     {
-                        this.ModelState.AddModelError(string.Empty, "The user couldn't be created.");
+                        this.ModelState.AddModelError(string.Empty, "El Cliente no puede ser creado.");
                         return this.View(model);
                     }
 
@@ -97,14 +99,14 @@ namespace MiAsistenteOnline.Web.Controllers
 
                     if (result2.Succeeded)
                     {
-                        return this.RedirectToAction("Index", "Home");
+                        return this.RedirectToAction("Categoria", "Products");
                     }
 
-                    this.ModelState.AddModelError(string.Empty, "The user couldn't be login.");
+                    this.ModelState.AddModelError(string.Empty, "No se pudo iniciar sesion. Intentelo de nuevo");
                     return this.View(model);
                 }
 
-                this.ModelState.AddModelError(string.Empty, "The username is already registered.");
+                this.ModelState.AddModelError(string.Empty, "El Cliente ya ha sido registrado.");
             }
 
             return this.View(model);

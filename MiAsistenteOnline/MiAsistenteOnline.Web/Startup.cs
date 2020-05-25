@@ -30,6 +30,10 @@ namespace MiAsistenteOnline.Web
         public void ConfigureServices(IServiceCollection services)
         {
 
+
+            services.AddSession();
+            services.AddDistributedMemoryCache();
+
             services.AddIdentity<User, IdentityRole>(cfg =>
             {
                 cfg.User.RequireUniqueEmail = true;
@@ -83,6 +87,7 @@ namespace MiAsistenteOnline.Web
                 app.UseHsts();
             }
 
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseStaticFiles();

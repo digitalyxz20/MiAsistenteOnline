@@ -10,6 +10,8 @@ using MiAsistenteOnline.Web.Data.Entities;
 using MiAsistenteOnline.Web.Helpers;
 using MiAsistenteOnline.Web.Models;
 using System.IO;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace MiAsistenteOnline.Web.Controllers
 {
@@ -53,8 +55,82 @@ namespace MiAsistenteOnline.Web.Controllers
 
 
 
-        // GET: Products/Details/5
-        public IActionResult Details(int? id)
+        public void SetSession(Object obj)
+        {
+            HttpContext.Session.SetString("carrito", JsonConvert.SerializeObject(obj));
+        }
+
+        public string GetSession()
+        {
+            return HttpContext.Session.GetString("carrito");
+        }
+
+        public IActionResult AgregarCarritoSessionIni(int Id, string Detalle, double Precio, double Cantidad)
+        {
+            List<PedidoDetalle> lista = new List<PedidoDetalle>();
+            var value = GetSession();
+            if (value == null)
+            {
+
+                lista = new List<PedidoDetalle>();
+                return PartialView("AgregarCarritoSession", lista);
+            }
+            lista = JsonConvert.DeserializeObject<List<PedidoDetalle>>(GetSession());
+            return PartialView("AgregarCarritoSession",lista);
+        }
+
+
+        [HttpPost]
+        public IActionResult AgregarCarritoSession(int Id,string Detalle,double  Precio,double Cantidad )
+        {
+
+            var product = new Product() {
+                Id = Id,
+                Name = Detalle,
+                Price = Convert.ToDecimal(Precio)
+
+            };
+
+            var modelo = new PedidoDetalle()
+            {
+                ProductId = Id,
+                Cantidad = Convert.ToInt32(Cantidad),
+                Subtotal = Cantidad * Precio,
+                Product=product
+
+            };
+
+            if (GetSession() == null)
+            {
+                List<PedidoDetalle> lista = new List<PedidoDetalle>();
+                lista.Add(modelo);
+                SetSession(lista);
+            }
+            else
+            {
+                List<PedidoDetalle> lista = JsonConvert.DeserializeObject<List<PedidoDetalle>>(GetSession());
+                lista.Add(modelo);
+                SetSession(lista);
+            }
+
+            var value = GetSession();
+            List<PedidoDetalle> lista1 = JsonConvert.DeserializeObject<List<PedidoDetalle>>(GetSession());
+            return PartialView(lista1);
+        }
+
+        public IActionResult VerCarrito()
+        {
+            List<PedidoDetalle> lista = JsonConvert.DeserializeObject<List<PedidoDetalle>>(GetSession());
+            return PartialView(lista);
+        }
+
+
+            /// <summary>
+            /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            // GET: Products/Details/5
+            public IActionResult Details(int? id)
         {
             if (id == null)
             {

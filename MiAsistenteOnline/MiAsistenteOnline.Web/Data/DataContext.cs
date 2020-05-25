@@ -24,7 +24,7 @@ namespace MiAsistenteOnline.Web.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<PedidoDetalle>().HasKey(x => new { x.PedidoId, x.ProductPresentacionId });
+            builder.Entity<PedidoDetalle>().HasKey(x => new { x.PedidoId, x.ProductId });
         }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
