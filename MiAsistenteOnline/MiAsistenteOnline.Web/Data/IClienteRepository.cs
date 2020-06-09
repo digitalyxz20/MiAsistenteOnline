@@ -8,6 +8,8 @@ namespace MiAsistenteOnline.Web.Data
 {
     public interface IClienteRepository : IGenericRepository<Cliente>
     {
-    
+        Task<Cliente> ObtenerClientePorDni(string dni);
+
+
     }
 }

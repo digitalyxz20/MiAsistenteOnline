@@ -28,11 +28,12 @@ namespace MiAsistenteOnline.Web.Data
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public async Task CreateAsync(T entity)
+        public async Task<int> CreateAsync(T entity)
         {
 
             await this.context.Set<T>().AddAsync(entity);
             await SaveAllAsync();
+            return entity.Id;
 
         }
 

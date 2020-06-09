@@ -1,4 +1,5 @@
-﻿using MiAsistenteOnline.Web.Data.Entities;
+﻿using MiAsistenteOnline.Web.Data;
+using MiAsistenteOnline.Web.Data.Entities;
 using MiAsistenteOnline.Web.Helpers;
 using MiAsistenteOnline.Web.Models;
 using Microsoft.AspNetCore.Identity;
@@ -13,10 +14,12 @@ namespace MiAsistenteOnline.Web.Controllers
     public class AccountController : Controller
     {
         private readonly IUserHelper userHelper;
+        private readonly IClienteRepository clienteRepository;
 
-        public AccountController(IUserHelper userHelper)
+        public AccountController(IUserHelper userHelper, IClienteRepository clienteRepository)
         {
             this.userHelper = userHelper;
+            this.clienteRepository = clienteRepository;
         }
 
         public IActionResult Login()
@@ -68,7 +71,8 @@ namespace MiAsistenteOnline.Web.Controllers
             if (this.ModelState.IsValid)
             {
                 var user = await this.userHelper.GetUserByEmailAsync(model.Username);
-                if (user == null)
+                var cliente = await this.clienteRepository.ObtenerClientePorDni(model.Username);
+                if (user == null && cliente == null)
                 {
                     user = new User
                     {
@@ -80,7 +84,21 @@ namespace MiAsistenteOnline.Web.Controllers
 
                     };
 
+                    cliente = new Cliente
+                    {
+                        Nombres = model.FirstName,
+                        DNI = model.Username,
+                        Email = $"{model.Username}@hot.com",
+                        Celular = model.Celular
+                    };
+
+
+
+
+
+
                     var result = await this.userHelper.AddUserAsync(user, model.Password);
+                    await this.clienteRepository.CreateAsync(cliente);
                     if (result != IdentityResult.Success)
                     {
                         this.ModelState.AddModelError(string.Empty, "El Cliente no puede ser creado.");

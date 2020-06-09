@@ -12,7 +12,7 @@ namespace MiAsistenteOnline.Web.Data
 
         Task<T> GetByIdAsync(int id);
 
-        Task CreateAsync(T entity);
+        Task<int> CreateAsync(T entity);
 
         Task UpdateAsync(T entity);
 

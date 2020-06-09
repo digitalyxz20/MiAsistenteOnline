@@ -17,7 +17,13 @@ namespace MiAsistenteOnline.Web.Data
         }
         public IQueryable<Cliente> GetAllWithUsers()
         {
-            return this.context.Clientes.Include(p => p.Zona );
+            return context.Clientes.Include(p => p.Zona );
         }
+
+        public async Task<Cliente> ObtenerClientePorDni(string dni)
+        {
+            return await context.Clientes.FirstAsync(p => p.DNI == dni);
+        }
+
     }
 }

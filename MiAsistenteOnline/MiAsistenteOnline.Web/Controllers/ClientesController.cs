@@ -13,10 +13,12 @@ namespace MiAsistenteOnline.Web.Controllers
     public class ClientesController : Controller
     {
         private readonly DataContext _context;
+        private readonly IClienteRepository clienteRepository;
 
-        public ClientesController(DataContext context)
+        public ClientesController(DataContext context, IClienteRepository clienteRepository)
         {
             _context = context;
+            this.clienteRepository = clienteRepository;
         }
 
         // GET: Clientes
@@ -58,8 +60,7 @@ namespace MiAsistenteOnline.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(cliente);
-                await _context.SaveChangesAsync();
+                await this.clienteRepository.CreateAsync(cliente);
                 return RedirectToAction(nameof(Index));
             }
             return View(cliente);

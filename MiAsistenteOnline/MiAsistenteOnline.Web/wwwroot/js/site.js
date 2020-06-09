@@ -134,6 +134,8 @@ function AgregarCarritoSession(Id, nombre, precio, elemento) {
 
 }
 
+
+
 function MasCantidad(elemento) {
     var cantidad = parseInt($("#" + elemento + "A").val());
     if (cantidad < 12) {
@@ -148,4 +150,28 @@ function MenorCantidad(elemento) {
         cantidad = cantidad - 1;
         $("#" + elemento + "A").val(cantidad);
     }
+}
+
+
+
+function ConfirmarCompra() {
+
+    var cantidad = $("#" + elemento + "A").val();
+    $.ajax({
+        type: "POST",
+        url: "InsertarVenta",
+    }) // Se ejecuta si todo fue bien.
+        .done(function (result) {
+            alert("operacion!");
+            $("#mensajesModal").html(result);
+        })
+        // Se ejecuta si se produjo un error.
+        .fail(function (xhr, status, error) {
+
+        })
+        // Hacer algo siempre, haya sido exitosa o no.
+        .always(function () {
+
+        });
+
 }

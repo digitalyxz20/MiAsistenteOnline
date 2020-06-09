@@ -27,14 +27,17 @@
 </head>
 <body onload="AgregarCarritoSessionIni()" style="background-color:yellowgreen">
 
-    <div class="social-bar" >
+    <div class="social-bar">
         <a href="#" class="icon icon-cart" target="_blank" data-toggle="modal" data-target="#exampleModal">&emsp;</a>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light"  >
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01" >
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <a class="navbar-brand" href="#">COMPRALO YA!</a>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
@@ -59,7 +62,7 @@
             <ul class="navbar-nav navbar-right" style="margin-right:5%">
                 @if (this.User.Identity.IsAuthenticated)
                 {
-                    <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Account" asp-action="ChangeUser"><h6>DNI:@this.User.Identity.Name</h6></a></li> 
+                    <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Account" asp-action="ChangeUser"><h6>DNI:@this.User.Identity.Name</h6></a></li>
                     <li class="nav-link"><a class="nav-link" asp-area="" asp-controller="Account" asp-action="Logout">Cerrar Sesion</a></li>
                 }
                 else

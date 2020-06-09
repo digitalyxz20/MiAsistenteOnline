@@ -19,11 +19,22 @@ namespace MiAsistenteOnline.Web.Controllers
     {
         private readonly IProductRepository productRepository;
         private readonly IUserHelper userHelper;
+        private readonly IClienteRepository clienteRepository;
+        private readonly IPedidoRepository pedidoRepository;
+        private readonly IPedidoDetalleRepository pedidoDetalleRepository;
 
-        public ProductsController(IProductRepository productRepository, IUserHelper userHelper)
+        public ProductsController(IProductRepository productRepository,
+                                  IUserHelper userHelper,
+                                  IClienteRepository clienteRepository,
+                                  IPedidoRepository pedidoRepository,
+                                  IPedidoDetalleRepository pedidoDetalleRepository
+                                  )
         {
             this.productRepository = productRepository;
             this.userHelper = userHelper;
+            this.clienteRepository = clienteRepository;
+            this.pedidoRepository = pedidoRepository;
+            this.pedidoDetalleRepository = pedidoDetalleRepository;
         }
 
         // GET: Products
@@ -118,6 +129,9 @@ namespace MiAsistenteOnline.Web.Controllers
             return PartialView(lista1);
         }
 
+
+
+
         public IActionResult VerCarrito()
         {
             List<PedidoDetalle> lista = JsonConvert.DeserializeObject<List<PedidoDetalle>>(GetSession());
@@ -125,12 +139,84 @@ namespace MiAsistenteOnline.Web.Controllers
         }
 
 
-            /// <summary>
-            /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        [HttpPost]
+        public async Task<IActionResult> InsertarVenta()
+        {
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                ViewData["Message"] = "Usted necesita iniciar su cuenta";
+                return View("Account/Login");
+            }
+
+            var value = GetSession();
+            if (value == null)
+            {
+                ViewData["Message"] = "No tiene productos en el carrito.";
+                return PartialView();
+            }
+
+            var usuario = await this.userHelper.GetUserByEmailAsync($"{ this.User.Identity.Name}@hot.com");
+            List<PedidoDetalle> lista = JsonConvert.DeserializeObject<List<PedidoDetalle>>(GetSession());
+            var cliente = await this.clienteRepository.ObtenerClientePorDni(this.User.Identity.Name);
+
+            var total = 0.0; 
+            foreach (var i in lista)
+            {
+                total += i.Subtotal;
+            }
+
+            var pedido = new Pedido
+            {
+                Cliente = cliente,
+                User = usuario,
+                FechaPedido = DateTime.Now,
+                Entregado = false,
+                Total = total
+            };
+
+            try
+            {
+                pedido.Id = await this.pedidoRepository.CreateAsync(pedido);
+            }
+            catch (Exception)
+            {
+                ViewData["Message"] = "Hubo Un error en ingresar el Pedido.";
+                return PartialView();
+            }
+
+            try
+            {
+                foreach (var i in lista)
+                {
+                    i.PedidoId = pedido.Id;
+                    await this.pedidoDetalleRepository.CreateAsync(i);
+                }
+            }
+            catch (Exception)
+            {
+                await this.pedidoRepository.DeleteAsync(pedido);
+                ViewData["Message"] = "Hubo Un error en ingresar los productos del pedido";
+                return PartialView();
+            }
+
+            ViewData["Message"] = "Se registro con exito, a continuacion no comunicaremos con usted via telefonica . Gracias";
+            return PartialView();
+
+        }
 
 
-            // GET: Products/Details/5
-            public IActionResult Details(int? id)
+
+
+
+
+
+
+        /// <summary>
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        // GET: Products/Details/5
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
