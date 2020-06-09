@@ -18,7 +18,7 @@ namespace MiAsistenteOnline.Web.Data
 
         Task DeleteAsync(T entity);
 
-        Task<bool> ExistAsync(int id);
+        Task<bool> ExistAsync(int id); 
     }
 
 }
