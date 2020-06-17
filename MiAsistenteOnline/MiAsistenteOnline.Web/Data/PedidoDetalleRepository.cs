@@ -7,13 +7,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MiAsistenteOnline.Web.Data
 {
-    public class PedidoDetalleRepository : GenericRepository<PedidoDetalle>, IPedidoDetalleRepository
-    {
-        private readonly DataContext context;
+    //public class PedidoDetalleRepository : GenericRepository<PedidoDetalle>, IPedidoDetalleRepository
+    //{
+    //    private readonly DataContext context;
 
-        public PedidoDetalleRepository(DataContext context) : base(context)
-        {
-            this.context = context;
-        }
-    }
+    //    public PedidoDetalleRepository(DataContext context) : base(context)
+    //    {
+    //        this.context = context;
+    //    }
+    //}
 }

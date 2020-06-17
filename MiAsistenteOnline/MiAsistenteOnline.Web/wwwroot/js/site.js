@@ -154,16 +154,21 @@ function MenorCantidad(elemento) {
 
 
 
-function ConfirmarCompra() {
-
-    var cantidad = $("#" + elemento + "A").val();
+function ConfirmarCompra() {;
     $.ajax({
         type: "POST",
         url: "InsertarVenta",
     }) // Se ejecuta si todo fue bien.
         .done(function (result) {
-            alert("operacion!");
-            $("#mensajesModal").html(result);
+            
+            $("#cerrarModalCarrito").click();
+            $("#MessegeModal").html(result);
+            $("#AbrirModalMensaje").click();
+            
+            //$('#MessegeModal').modal("show");
+
+           //location.href = "/Account/Login";
+
         })
         // Se ejecuta si se produjo un error.
         .fail(function (xhr, status, error) {

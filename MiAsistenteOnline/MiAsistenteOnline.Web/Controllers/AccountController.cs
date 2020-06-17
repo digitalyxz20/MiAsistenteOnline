@@ -49,7 +49,7 @@ namespace MiAsistenteOnline.Web.Controllers
                 }
             }
 
-            this.ModelState.AddModelError(string.Empty, "Failed to login.");
+            this.ModelState.AddModelError(string.Empty, "Error en iniciar su cuenta, compruebe sus datos");
             return this.View(model);
         }
 
@@ -71,7 +71,7 @@ namespace MiAsistenteOnline.Web.Controllers
             if (this.ModelState.IsValid)
             {
                 var user = await this.userHelper.GetUserByEmailAsync(model.Username);
-                var cliente = await this.clienteRepository.ObtenerClientePorDni(model.Username);
+                var cliente = this.clienteRepository.ObtenerClientePorDni(model.Username);
                 if (user == null && cliente == null)
                 {
                     user = new User
@@ -98,10 +98,11 @@ namespace MiAsistenteOnline.Web.Controllers
 
 
                     var result = await this.userHelper.AddUserAsync(user, model.Password);
-                    await this.clienteRepository.CreateAsync(cliente);
+                    cliente.Id = await this.clienteRepository.CreateAsync(cliente);
                     if (result != IdentityResult.Success)
                     {
                         this.ModelState.AddModelError(string.Empty, "El Cliente no puede ser creado.");
+                        await this.clienteRepository.DeleteAsync(cliente);
                         return this.View(model);
                     }
 

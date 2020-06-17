@@ -20,9 +20,9 @@ namespace MiAsistenteOnline.Web.Data
             return context.Clientes.Include(p => p.Zona );
         }
 
-        public async Task<Cliente> ObtenerClientePorDni(string dni)
+        public Cliente ObtenerClientePorDni(string dni)
         {
-            return await context.Clientes.FirstAsync(p => p.DNI == dni);
+            return context.Clientes.FirstOrDefault(p => p.DNI == dni);
         }
 
     }

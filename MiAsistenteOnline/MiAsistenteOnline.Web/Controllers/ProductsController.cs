@@ -17,24 +17,26 @@ namespace MiAsistenteOnline.Web.Controllers
 {
     public class ProductsController : Controller
     {
+        private readonly DataContext context;
         private readonly IProductRepository productRepository;
         private readonly IUserHelper userHelper;
         private readonly IClienteRepository clienteRepository;
         private readonly IPedidoRepository pedidoRepository;
-        private readonly IPedidoDetalleRepository pedidoDetalleRepository;
+       // private readonly IPedidoDetalleRepository pedidoDetalleRepository;
 
         public ProductsController(IProductRepository productRepository,
                                   IUserHelper userHelper,
                                   IClienteRepository clienteRepository,
                                   IPedidoRepository pedidoRepository,
-                                  IPedidoDetalleRepository pedidoDetalleRepository
+                                  DataContext context
                                   )
         {
             this.productRepository = productRepository;
             this.userHelper = userHelper;
             this.clienteRepository = clienteRepository;
             this.pedidoRepository = pedidoRepository;
-            this.pedidoDetalleRepository = pedidoDetalleRepository;
+            //this.pedidoDetalleRepository = pedidoDetalleRepository;
+            this.context = context;
         }
 
         // GET: Products
@@ -144,20 +146,22 @@ namespace MiAsistenteOnline.Web.Controllers
         {
             if (!this.User.Identity.IsAuthenticated)
             {
-                ViewData["Message"] = "Usted necesita iniciar su cuenta";
-                return View("Account/Login");
-            }
+                ViewBag.Message = "Usted necesita iniciar su cuenta";
 
+                return PartialView();
+
+            }
+ 
             var value = GetSession();
             if (value == null)
             {
-                ViewData["Message"] = "No tiene productos en el carrito.";
+                ViewBag.Message = "No tiene productos en el carrito.";
                 return PartialView();
             }
 
             var usuario = await this.userHelper.GetUserByEmailAsync($"{ this.User.Identity.Name}@hot.com");
             List<PedidoDetalle> lista = JsonConvert.DeserializeObject<List<PedidoDetalle>>(GetSession());
-            var cliente = await this.clienteRepository.ObtenerClientePorDni(this.User.Identity.Name);
+            var cliente = this.clienteRepository.ObtenerClientePorDni(this.User.Identity.Name);
 
             var total = 0.0; 
             foreach (var i in lista)
@@ -180,7 +184,7 @@ namespace MiAsistenteOnline.Web.Controllers
             }
             catch (Exception)
             {
-                ViewData["Message"] = "Hubo Un error en ingresar el Pedido.";
+                ViewBag.Message = "Hubo Un error en ingresar el Pedido.";
                 return PartialView();
             }
 
@@ -189,17 +193,19 @@ namespace MiAsistenteOnline.Web.Controllers
                 foreach (var i in lista)
                 {
                     i.PedidoId = pedido.Id;
-                    await this.pedidoDetalleRepository.CreateAsync(i);
+                    i.Product = null;
+                    this.context.PedidosDetalles.Add(i);
+                    await context.SaveChangesAsync();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 await this.pedidoRepository.DeleteAsync(pedido);
-                ViewData["Message"] = "Hubo Un error en ingresar los productos del pedido";
+                ViewBag.Message = "Hubo Un error en ingresar los productos del pedido";
                 return PartialView();
             }
 
-            ViewData["Message"] = "Se registro con exito, a continuacion no comunicaremos con usted via telefonica . Gracias";
+            ViewBag.Message = "Se registro con exito, a continuacion no comunicaremos con usted via telefonica . Gracias";
             return PartialView();
 
         }

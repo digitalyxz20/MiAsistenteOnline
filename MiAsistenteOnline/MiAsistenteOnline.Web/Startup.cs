@@ -67,7 +67,7 @@ namespace MiAsistenteOnline.Web
             services.AddScoped<IProductPresentacionRepository, ProductPresentacionRepository>();
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IPedidoRepository, PedidoRepository>();
-            services.AddScoped<IPedidoDetalleRepository, PedidoDetalleRepository>();
+            //services.AddScoped<IPedidoDetalleRepository, PedidoDetalleRepository>();
             services.AddScoped<IZonaRepository, ZonaRepository>();
 
             services.AddScoped<IUserHelper, UserHelper>();

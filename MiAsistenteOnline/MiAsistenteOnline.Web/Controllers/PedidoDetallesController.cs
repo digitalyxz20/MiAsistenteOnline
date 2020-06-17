@@ -50,7 +50,7 @@ namespace MiAsistenteOnline.Web.Controllers
         public IActionResult Create()
         {
             ViewData["PedidoId"] = new SelectList(_context.Pedidos, "Id", "Id");
-            ViewData["ProductPresentacionId"] = new SelectList(_context.ProductPresentaciones, "Id", "Id");
+            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace MiAsistenteOnline.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PedidoId,ProductPresentacionId,Cantidad,Subtotal,Id")] PedidoDetalle pedidoDetalle)
+        public async Task<IActionResult> Create([Bind("PedidoId,ProductId,Cantidad,Subtotal")] PedidoDetalle pedidoDetalle)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +68,7 @@ namespace MiAsistenteOnline.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["PedidoId"] = new SelectList(_context.Pedidos, "Id", "Id", pedidoDetalle.PedidoId);
-            ViewData["ProductPresentacionId"] = new SelectList(_context.ProductPresentaciones, "Id", "Id", pedidoDetalle.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name", pedidoDetalle.ProductId);
             return View(pedidoDetalle);
         }
 
@@ -86,7 +86,7 @@ namespace MiAsistenteOnline.Web.Controllers
                 return NotFound();
             }
             ViewData["PedidoId"] = new SelectList(_context.Pedidos, "Id", "Id", pedidoDetalle.PedidoId);
-            ViewData["ProductPresentacionId"] = new SelectList(_context.ProductPresentaciones, "Id", "Id", pedidoDetalle.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name", pedidoDetalle.ProductId);
             return View(pedidoDetalle);
         }
 
@@ -95,7 +95,7 @@ namespace MiAsistenteOnline.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PedidoId,ProductPresentacionId,Cantidad,Subtotal,Id")] PedidoDetalle pedidoDetalle)
+        public async Task<IActionResult> Edit(int id, [Bind("PedidoId,ProductId,Cantidad,Subtotal")] PedidoDetalle pedidoDetalle)
         {
             if (id != pedidoDetalle.PedidoId)
             {
@@ -123,7 +123,7 @@ namespace MiAsistenteOnline.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["PedidoId"] = new SelectList(_context.Pedidos, "Id", "Id", pedidoDetalle.PedidoId);
-            ViewData["ProductPresentacionId"] = new SelectList(_context.ProductPresentaciones, "Id", "Id", pedidoDetalle.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name", pedidoDetalle.ProductId);
             return View(pedidoDetalle);
         }
 

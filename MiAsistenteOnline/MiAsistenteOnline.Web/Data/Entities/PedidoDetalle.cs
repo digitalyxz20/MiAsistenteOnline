@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MiAsistenteOnline.Web.Data.Entities
 {
-    public class PedidoDetalle :IEntity
+    public class PedidoDetalle
     {
         public int PedidoId { get; set; }
         public int ProductId { get; set; }
@@ -15,6 +15,6 @@ namespace MiAsistenteOnline.Web.Data.Entities
 
         public int Cantidad  { get; set; }
         public double Subtotal { get; set; }
-        public int Id { get; set; }
+
     }
 }
