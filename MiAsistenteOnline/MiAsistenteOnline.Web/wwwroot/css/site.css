@@ -65,22 +65,6 @@ body {
             color: white;
         }
 
-.carritoboton {
-    position: fixed;
-    right: 0;
-    top: 1%;
-    font-size: 1.2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    z-index: 100;
-    border-radius: 5px 5px 5px 5px;
-    -moz-border-radius: 5px 5px 5px 5px;
-    -webkit-border-radius: 5px 5px 5px 5px;
-    border: 2px solid #a8a83e;
-    background-color: #dfe30c;
-}
-
 
 html {
     font-size: 16px;
@@ -95,6 +79,9 @@ html {
     flex-direction: column;
     align-items: flex-end;
     z-index: 100;
+    -webkit-transform: none !important;
+    transform: none !important;
+    contain: none !important;
 }
 
 .icon {
